@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import userLogo from "../assets/user.png";
+import { AuthContext } from "../provider/AuthProvider";
 
 const NavBar = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="w-11/12 mx-auto py-8 flex items-center justify-between">
-      <div></div>
+      <div>{user?.email}</div>
       <div className="flex items-center justify-center gap-8 text-[#706F6F] font-semibold">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/about">About</NavLink>
@@ -13,9 +15,13 @@ const NavBar = () => {
       </div>
       <div className="flex items-center justify-center gap-2">
         <img src={userLogo} alt="userLogo" />
-        <Link to="/auth/login" className="btn btn-neutral rounded-none">
-          Login
-        </Link>
+        {user && user?.email ? (
+          <button className="btn btn-neutral rounded-none">Log Out</button>
+        ) : (
+          <Link to="/auth/login" className="btn btn-neutral rounded-none">
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );
