@@ -12,8 +12,9 @@ const Register = () => {
     handleRegister(email, password)
     .then((res) => {
       const user = res.user;
-      console.log(user);
       setUser(user);
+      console.log(user);
+      e.target.reset()
     })
     .catch((error) => console.log("ERROR", error.message))
   }

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
-  const { handleLogin } = useContext(AuthContext);
+  const { handleLogin, setUser } = useContext(AuthContext);
 
   const handleLoginForm = (e) => {
     e.preventDefault();
@@ -11,7 +11,12 @@ const Login = () => {
     const password = e.target.password.value;
 
     handleLogin(email, password)
-    .then(res => console.log(res.user))
+    .then((res) => {
+      const user = res.user;
+      setUser(user);
+      console.log(user)
+      e.target.reset()
+    })
     .catch(error => console.log("ERROR", error.message))
   };
 
