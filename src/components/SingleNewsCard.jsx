@@ -1,9 +1,10 @@
 import React from "react";
 import { CiBookmark } from "react-icons/ci";
 import { FaStar, FaEye, FaShareAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const SingleNewsCard = ({ singleNews }) => {
-  const { title, author, rating, total_view, details, thumbnail_url } =
+  const { title, _id, author, rating, total_view, details, thumbnail_url } =
     singleNews;
 
   return (
@@ -44,7 +45,7 @@ const SingleNewsCard = ({ singleNews }) => {
         {/* Details */}
         <p className="text-gray-600 text-sm mb-3">
           {details.slice(0, 150)}...
-          <span className="text-blue-500"> Read More</span>
+          <Link to={`/news/${_id}`} className="text-blue-500"> Read More</Link>
         </p>
 
         {/* Footer */}
